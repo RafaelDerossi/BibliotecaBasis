@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace BibliotecaBasis.Comum.Mensagens
+namespace BibliotecaBasis.Comum.Mediator.Mensagens
 {
     public abstract class Event : Message, INotification
     {

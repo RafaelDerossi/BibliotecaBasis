@@ -33,7 +33,7 @@ namespace BibliotecaBasis.Api.Configuration
                 .Build();
 
 
-            services.AddDbContext<LivroContextDB>(options =>
+            services.AddDbContext<BibliotecaContextDB>(options =>
                options.UseSqlServer(configuration.GetConnectionString("BibliotecaBasisConnection")));
 
 

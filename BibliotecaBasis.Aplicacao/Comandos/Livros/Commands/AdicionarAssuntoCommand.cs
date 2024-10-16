@@ -1,11 +1,11 @@
 ﻿using BibliotecaBasis.Aplicacao.Comandos.Livros.Validacao;
-using BibliotecaBasis.Dominio.ViewModels;
+using BibliotecaBasis.Dominio.ViewModels.Livros;
 
 namespace BibliotecaBasis.Aplicacao.Comandos.Livros.Commands
 {
     public class AdicionarLivroCommand : LivroCommand
     {
-        public AdicionarLivroCommand(LivroViewModel model)
+        public AdicionarLivroCommand(AdicionaLivroViewModel model)
         {
             Titulo = model.Titulo;
             Editora = model.Editora;

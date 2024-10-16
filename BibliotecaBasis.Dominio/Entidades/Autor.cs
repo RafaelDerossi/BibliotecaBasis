@@ -2,7 +2,7 @@
 
 namespace BibliotecaBasis.Dominio.Entidades
 {
-    public class Autor(string? nome) : Entidade
+    public class Autor(string? nome) : Entidade, IAggregateRoot
     {
         public const int NomeSize = 40;
 

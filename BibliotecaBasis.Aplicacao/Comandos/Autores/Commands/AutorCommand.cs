@@ -1,4 +1,4 @@
-﻿using BibliotecaBasis.Comum.Mensagens;
+﻿using BibliotecaBasis.Comum.Mediator.Mensagens;
 
 namespace BibliotecaBasis.Aplicacao.Comandos.Autores.Commands
 {

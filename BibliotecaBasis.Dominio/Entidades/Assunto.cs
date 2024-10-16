@@ -2,7 +2,7 @@
 
 namespace BibliotecaBasis.Dominio.Entidades
 {
-    public class Assunto(string? descricao) : Entidade
+    public class Assunto(string? descricao) : Entidade, IAggregateRoot
     {
         public const int DescricaoSize = 20;
 

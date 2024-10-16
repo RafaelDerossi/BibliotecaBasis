@@ -6,29 +6,26 @@ using System.Linq.Expressions;
 
 namespace BibliotecaBasis.Infra.Data.Repositorio
 {
-    public class LivroRepositorio(BibliotecaContextDB context) : ILivroRepositorio
+    public class AutorRepositorio(BibliotecaContextDB context) : IAutorRepositorio
     {
         private readonly BibliotecaContextDB _context = context;
 
         public IUnitOfWorks UnitOfWork => _context;
 
 
-        public async Task<Livro?> ObterPorId(Guid Id)
+        public async Task<Autor?> ObterPorId(Guid Id)
         {
-            return await _context.Livros?
-                .Include(l => l.Autores)
-                .Include(l => l.Assuntos)
+            return await _context.Autores?
+                .Include(l => l.Livros)                
                 .FirstOrDefaultAsync(l => l.Id == Id && !l.Lixeira)!;
         }
        
-        public async Task<IEnumerable<Livro>?> Obter(Expression<Func<Livro, bool>> expressao, bool OrderByDesc = false, int quantidade = 0, int pagina = 1)
+        public async Task<IEnumerable<Autor>?> Obter(Expression<Func<Autor, bool>> expressao, bool OrderByDesc = false, int quantidade = 0, int pagina = 1)
         {
             if (OrderByDesc)
             {
                 if (quantidade > 0)
-                    return await _context.Livros?
-                        .Include(c => c.Autores)
-                        .Include(c => c.Assuntos)
+                    return await _context.Autores?                        
                         .AsNoTracking()
                         .Where(expressao)
                         .OrderByDescending(x => x.DataDeCadastro)
@@ -36,9 +33,7 @@ namespace BibliotecaBasis.Infra.Data.Repositorio
                         .Take(quantidade)
                         .ToListAsync()!;
 
-                return await _context.Livros?
-                    .Include(c => c.Autores)
-                    .Include(c => c.Assuntos)
+                return await _context.Autores?                
                     .AsNoTracking()
                     .Where(expressao)
                     .OrderByDescending(x => x.DataDeCadastro)
@@ -46,9 +41,7 @@ namespace BibliotecaBasis.Infra.Data.Repositorio
             }
 
             if (quantidade > 0)
-                return await _context.Livros?
-                    .Include(c => c.Autores)
-                    .Include(c => c.Assuntos)
+                return await _context.Autores?                
                     .AsNoTracking()
                     .Where(expressao)
                     .OrderBy(x => x.DataDeCadastro)
@@ -56,9 +49,7 @@ namespace BibliotecaBasis.Infra.Data.Repositorio
                     .Take(quantidade)
                     .ToListAsync()!;
 
-            return await _context.Livros?
-                .Include(c => c.Autores)
-                .Include(c => c.Assuntos)
+            return await _context.Autores?            
                 .AsNoTracking()
                 .Where(expressao)
                 .OrderBy(x => x.DataDeCadastro)
@@ -67,14 +58,14 @@ namespace BibliotecaBasis.Infra.Data.Repositorio
 
        
 
-        public void Adicionar(Livro entity)
+        public void Adicionar(Autor entity)
         {
-            _context.Livros?.Add(entity);
+            _context.Autores?.Add(entity);
         }
 
-        public void Atualizar(Livro entity)
+        public void Atualizar(Autor entity)
         {
-            _context.Livros?.Update(entity);
+            _context.Autores?.Update(entity);
         }
            
 

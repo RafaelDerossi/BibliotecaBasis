@@ -1,6 +1,6 @@
-﻿namespace BibliotecaBasis.Dominio.ViewModels
+﻿namespace BibliotecaBasis.Dominio.ViewModels.Livros
 {
-    public class LivroViewModel
+    public class AdicionaLivroViewModel
     {
         public string? Titulo { get; set; }
 

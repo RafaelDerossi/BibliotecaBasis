@@ -1,4 +1,4 @@
-﻿using BibliotecaBasis.Comum.Mensagens;
+﻿using BibliotecaBasis.Comum.Mediator.Mensagens;
 using FluentValidation.Results;
 using MediatR;
 

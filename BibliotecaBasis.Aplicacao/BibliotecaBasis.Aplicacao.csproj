@@ -7,13 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Comandos\Assuntos\Handlers\" />
-    <Folder Include="Comandos\Autores\Handlers\" />
-    <Folder Include="Comandos\Livros\Handlers\" />
-    <Folder Include="Consultas\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\BibliotecaBasis.Comum\BibliotecaBasis.Comum.csproj" />
     <ProjectReference Include="..\BibliotecaBasis.Dominio\BibliotecaBasis.Dominio.csproj" />
   </ItemGroup>

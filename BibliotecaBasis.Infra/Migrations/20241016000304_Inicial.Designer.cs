@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BibliotecaBasis.Infra.Migrations
 {
-    [DbContext(typeof(LivroContextDB))]
+    [DbContext(typeof(BibliotecaContextDB))]
     [Migration("20241016000304_Inicial")]
     partial class Inicial
     {
