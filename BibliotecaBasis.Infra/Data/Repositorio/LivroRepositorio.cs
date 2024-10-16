@@ -18,6 +18,7 @@ namespace BibliotecaBasis.Infra.Data.Repositorio
             return await _context.Livros?
                 .Include(l => l.Autores)
                 .Include(l => l.Assuntos)
+                .Include(l => l.Precos)
                 .FirstOrDefaultAsync(l => l.Id == Id && !l.Lixeira)!;
         }
        
@@ -29,7 +30,7 @@ namespace BibliotecaBasis.Infra.Data.Repositorio
                     return await _context.Livros?
                         .Include(c => c.Autores)
                         .Include(c => c.Assuntos)
-                        .AsNoTracking()
+                        .Include(l => l.Precos)
                         .Where(expressao)
                         .OrderByDescending(x => x.DataDeCadastro)
                         .Skip((pagina - 1) * quantidade)
@@ -39,7 +40,7 @@ namespace BibliotecaBasis.Infra.Data.Repositorio
                 return await _context.Livros?
                     .Include(c => c.Autores)
                     .Include(c => c.Assuntos)
-                    .AsNoTracking()
+                    .Include(l => l.Precos)
                     .Where(expressao)
                     .OrderByDescending(x => x.DataDeCadastro)
                     .ToListAsync()!;
@@ -49,7 +50,7 @@ namespace BibliotecaBasis.Infra.Data.Repositorio
                 return await _context.Livros?
                     .Include(c => c.Autores)
                     .Include(c => c.Assuntos)
-                    .AsNoTracking()
+                    .Include(l => l.Precos)
                     .Where(expressao)
                     .OrderBy(x => x.DataDeCadastro)
                     .Skip((pagina - 1) * quantidade)
@@ -59,7 +60,7 @@ namespace BibliotecaBasis.Infra.Data.Repositorio
             return await _context.Livros?
                 .Include(c => c.Autores)
                 .Include(c => c.Assuntos)
-                .AsNoTracking()
+                .Include(l => l.Precos)
                 .Where(expressao)
                 .OrderBy(x => x.DataDeCadastro)
                 .ToListAsync()!;
@@ -76,9 +77,31 @@ namespace BibliotecaBasis.Infra.Data.Repositorio
         {
             _context.Livros?.Update(entity);
         }
-           
 
         
+
+
+
+        public async Task<Preco?> ObterPrecoPorId(Guid Id)
+        {
+            return await _context.Precos?                
+                .FirstOrDefaultAsync(l => l.Id == Id && !l.Lixeira)!;
+        }
+
+
+        public void Adicionar(Preco entity)
+        {
+            _context.Precos?.Add(entity);
+        }
+
+        public void Atualizar(Preco entity)
+        {
+            _context.Precos?.Update(entity);
+        }
+
+
+
+
 
         public void Dispose()
         {

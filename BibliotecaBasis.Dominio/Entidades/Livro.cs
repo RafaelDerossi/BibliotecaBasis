@@ -21,7 +21,10 @@ namespace BibliotecaBasis.Dominio.Entidades
 
         private readonly List<Assunto> _Assuntos = [];
         public IReadOnlyCollection<Assunto>? Assuntos => _Assuntos;
-        
+
+
+        private readonly List<Preco> _Precos = [];
+        public IReadOnlyCollection<Preco>? Precos => _Precos.Where(p=>!p.Lixeira).ToList();
 
 
 

@@ -12,6 +12,7 @@ namespace BibliotecaBasis.Infra.Data
         public DbSet<Livro>? Livros { get; set; }
         public DbSet<Assunto>? Assuntos { get; set; }
         public DbSet<Autor>? Autores { get; set; }
+        public DbSet<Preco>? Precos { get; set; }
         
         public BibliotecaContextDB(DbContextOptions<BibliotecaContextDB> options,
                   IMediatorHandler mediatorHandler)

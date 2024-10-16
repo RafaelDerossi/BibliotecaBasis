@@ -20,6 +20,7 @@ namespace BibliotecaBasis.Dominio.ViewModels.Livros
 
         public IEnumerable<AssuntoViewModel>? Assuntos { get; set; }
 
+        public IEnumerable<PrecoViewModel>? Precos { get; set; }
 
         public static LivroViewModel Mapear(Livro livro)
         {
@@ -31,7 +32,8 @@ namespace BibliotecaBasis.Dominio.ViewModels.Livros
                 Edicao = livro.Edicao,
                 AnoPublicacao = livro.AnoPublicacao,
                 Autores = livro.Autores?.Select(AutorViewModel.Mapear),
-                Assuntos = livro.Assuntos?.Select(AssuntoViewModel.Mapear)
+                Assuntos = livro.Assuntos?.Select(AssuntoViewModel.Mapear),
+                Precos = livro.Precos?.Select(PrecoViewModel.Mapear)
             };
         }
 

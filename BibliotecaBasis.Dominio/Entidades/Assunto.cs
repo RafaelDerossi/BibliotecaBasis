@@ -6,7 +6,7 @@ namespace BibliotecaBasis.Dominio.Entidades
     {
         public const int DescricaoSize = 20;
 
-        public string? Descricao { get; set; } = descricao;
+        public string? Descricao { get; private set; } = descricao;
 
 
         private readonly List<Livro> _Livros = [];
