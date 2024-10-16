@@ -47,26 +47,38 @@ namespace BibliotecaBasis.Api.Controllers.Comum
 
         protected ActionResult RespostaPersonalizadaComValidacao(ModelStateDictionary modelState)
         {
-            var errors = new List<string>();
+            var modelErros = modelState.Values.SelectMany(e => e.Errors);
 
-            foreach (var erro in modelState.Values.SelectMany(e => e.Errors))
+            if (modelErros != null && modelErros.Count() > 0)
             {
-                errors.Add(erro.ErrorMessage);
+                var errors = new List<string>();
+
+                foreach (var erro in modelState.Values.SelectMany(e => e.Errors))
+                {
+                    errors.Add(erro.ErrorMessage);
+                }
+
+                return RespostaPersonalizadaComErros(errors);
             }
 
-            return RespostaPersonalizadaComErros(errors);
+            return RespostaPersonalizadaVaziaSucesso();
         }
 
         protected ActionResult RespostaPersonalizadaComValidacao(ValidationResult validationResult)
         {
-            var errors = new List<string>();
-
-            foreach (var erro in validationResult.Errors)
+            if (validationResult.Errors.Count() > 0)
             {
-                errors.Add(erro.ErrorMessage); 
-            }            
+                var errors = new List<string>();
 
-            return RespostaPersonalizadaComErros(errors);
+                foreach (var erro in validationResult.Errors)
+                {
+                    errors.Add(erro.ErrorMessage);
+                }
+
+                return RespostaPersonalizadaComErros(errors);
+            }
+
+            return RespostaPersonalizadaVaziaSucesso();
         }
                 
     }

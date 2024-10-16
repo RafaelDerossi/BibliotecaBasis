@@ -34,7 +34,7 @@ namespace BibliotecaBasis.Infra.Migrations
 
                     b.HasIndex("LivrosId");
 
-                    b.ToTable("AssuntoLivro");
+                    b.ToTable("AssuntoLivro", (string)null);
                 });
 
             modelBuilder.Entity("AutorLivro", b =>
@@ -49,7 +49,7 @@ namespace BibliotecaBasis.Infra.Migrations
 
                     b.HasIndex("LivrosId");
 
-                    b.ToTable("AutorLivro");
+                    b.ToTable("AutorLivro", (string)null);
                 });
 
             modelBuilder.Entity("BibliotecaBasis.Dominio.Entidades.Assunto", b =>

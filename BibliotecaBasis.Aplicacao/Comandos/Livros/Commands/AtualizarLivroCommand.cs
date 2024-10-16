@@ -3,16 +3,17 @@ using BibliotecaBasis.Dominio.ViewModels.Livros;
 
 namespace BibliotecaBasis.Aplicacao.Comandos.Livros.Commands
 {
-    public class AdicionarLivroCommand : LivroCommand
+    public class AtualizarLivroCommand : LivroCommand
     {
-        public AdicionarLivroCommand(AdicionaLivroViewModel model)
+        public AtualizarLivroCommand(AtualizaLivroViewModel model)
         {
+            Id = model.Id;
             Titulo = model.Titulo;
             Editora = model.Editora;
             Edicao = model.Edicao;
             AnoPublicacao = model.AnoPublicacao;
-            Autores = model.Autores ?? [];
             Assuntos = model.Assuntos ?? [];
+            Autores = model.Autores ?? [];
         }
 
 
@@ -21,15 +22,16 @@ namespace BibliotecaBasis.Aplicacao.Comandos.Livros.Commands
             if (!ValidationResult.IsValid)
                 return ValidationResult.IsValid;
 
-            ValidationResult = new AdicionarLivroCommandValidation().Validate(this);
+            ValidationResult = new AtualizarLivroCommandValidation().Validate(this);
             return ValidationResult.IsValid;
         }
 
 
-        public class AdicionarLivroCommandValidation : LivroValidation<AdicionarLivroCommand>
+        public class AtualizarLivroCommandValidation : LivroValidation<AtualizarLivroCommand>
         {
-            public AdicionarLivroCommandValidation()
+            public AtualizarLivroCommandValidation()
             {
+                ValidateId();
                 ValidateTitulo();
                 ValidateEditora();
                 ValidateAnoPublicacao();

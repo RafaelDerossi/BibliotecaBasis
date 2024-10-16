@@ -15,13 +15,13 @@ namespace BibliotecaBasis.Dominio.Entidades
         public string? AnoPublicacao { get; private set; } = anoPublicacao;
 
 
-
         private readonly List<Autor> _Autores = [];
-        public IReadOnlyCollection<Autor> Autores => _Autores;
+        public IReadOnlyCollection<Autor>? Autores => _Autores;
 
 
         private readonly List<Assunto> _Assuntos = [];
-        public IReadOnlyCollection<Assunto> Assuntos => _Assuntos;
+        public IReadOnlyCollection<Assunto>? Assuntos => _Assuntos;
+        
 
 
 
@@ -32,5 +32,16 @@ namespace BibliotecaBasis.Dominio.Entidades
         public void SetEdicao(int valor) => Edicao = valor;
 
         public void SetAnoPublicacao(string? valor) => AnoPublicacao = valor;
+
+        
+        public void SetAssuntos(IEnumerable<Assunto> assuntos) => _Assuntos.AddRange(assuntos.ToList());
+
+        public void ApagarAssuntos() => _Assuntos.Clear();
+
+
+        public void SetAutores(IEnumerable<Autor> autores) => _Autores.AddRange(autores.ToList());
+
+        public void ApagarAutores() => _Autores.Clear();
+
     }
 }

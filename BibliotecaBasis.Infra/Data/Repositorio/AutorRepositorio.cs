@@ -25,32 +25,28 @@ namespace BibliotecaBasis.Infra.Data.Repositorio
             if (OrderByDesc)
             {
                 if (quantidade > 0)
-                    return await _context.Autores?                        
-                        .AsNoTracking()
+                    return await _context.Autores?
                         .Where(expressao)
                         .OrderByDescending(x => x.DataDeCadastro)
                         .Skip((pagina - 1) * quantidade)
                         .Take(quantidade)
                         .ToListAsync()!;
 
-                return await _context.Autores?                
-                    .AsNoTracking()
+                return await _context.Autores?
                     .Where(expressao)
                     .OrderByDescending(x => x.DataDeCadastro)
                     .ToListAsync()!;
             }
 
             if (quantidade > 0)
-                return await _context.Autores?                
-                    .AsNoTracking()
+                return await _context.Autores?
                     .Where(expressao)
                     .OrderBy(x => x.DataDeCadastro)
                     .Skip((pagina - 1) * quantidade)
                     .Take(quantidade)
                     .ToListAsync()!;
 
-            return await _context.Autores?            
-                .AsNoTracking()
+            return await _context.Autores?
                 .Where(expressao)
                 .OrderBy(x => x.DataDeCadastro)
                 .ToListAsync()!;

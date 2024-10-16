@@ -9,23 +9,61 @@ namespace BibliotecaBasis.Aplicacao.Comandos.Assuntos.Handlers
 {
     public class AutorCommandHandler(IAutorRepositorio autorRepositorio) : CommandHandler,
         IRequestHandler<AdicionarAutorCommand, ValidationResult>,
-         IDisposable
+        IRequestHandler<AtualizarAutorCommand, ValidationResult>,
+        IRequestHandler<ApagarAutorCommand, ValidationResult>,
+        IDisposable
     {
-        private readonly IAutorRepositorio autorRepositorio = autorRepositorio;
+        private readonly IAutorRepositorio _autorRepositorio = autorRepositorio;
 
         public async Task<ValidationResult> Handle(AdicionarAutorCommand request, CancellationToken cancellationToken)
         {
             if (!request.EstaValido()) return request.ValidationResult;
 
-            autorRepositorio.Adicionar(new Autor(request.Nome));            
+            _autorRepositorio.Adicionar(new Autor(request.Nome));            
 
-            return await PersistirDados(autorRepositorio.UnitOfWork);
+            return await PersistirDados(_autorRepositorio.UnitOfWork);
+        }
+
+        public async Task<ValidationResult> Handle(AtualizarAutorCommand request, CancellationToken cancellationToken)
+        {
+            if (!request.EstaValido()) return request.ValidationResult;
+
+            var autor = await _autorRepositorio.ObterPorId(request.Id);
+            if (autor is null)
+            {
+                AdicionarErro("Autor não encontrado");
+                return ValidationResult;
+            }
+
+            autor.SetNome(request.Nome);
+
+            _autorRepositorio.Atualizar(autor);
+
+            return await PersistirDados(_autorRepositorio.UnitOfWork);
+        }
+
+        public async Task<ValidationResult> Handle(ApagarAutorCommand request, CancellationToken cancellationToken)
+        {
+            if (!request.EstaValido()) return request.ValidationResult;
+
+            var autor = await _autorRepositorio.ObterPorId(request.Id);
+            if (autor is null)
+            {
+                AdicionarErro("Autor não encontrado");
+                return ValidationResult;
+            }
+
+            autor.EnviarParaLixeira();
+
+            _autorRepositorio.Atualizar(autor);
+
+            return await PersistirDados(_autorRepositorio.UnitOfWork);
         }
 
 
         public void Dispose()
         {
-            autorRepositorio?.Dispose();
+            _autorRepositorio?.Dispose();
         }
     }
 }

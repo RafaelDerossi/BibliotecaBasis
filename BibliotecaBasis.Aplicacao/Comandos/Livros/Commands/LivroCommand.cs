@@ -14,5 +14,8 @@ namespace BibliotecaBasis.Aplicacao.Comandos.Livros.Commands
 
         public string? AnoPublicacao { get; protected set; }
 
+        public IEnumerable<Guid> Autores { get; protected set; }
+
+        public IEnumerable<Guid> Assuntos { get; protected set; }
     }
 }
