@@ -1,11 +1,11 @@
 ﻿using BibliotecaBasis.Aplicacao.Comandos.Assuntos.Validacao;
-using BibliotecaBasis.Dominio.ViewModels.Assuntos;
+using BibliotecaBasis.Dominio.Models.Assuntos;
 
 namespace BibliotecaBasis.Aplicacao.Comandos.Assuntos.Commands
 {
     public class AtualizarAssuntoCommand : AssuntoCommand
     {
-        public AtualizarAssuntoCommand(AtualizaAssuntoViewModel viewModel)
+        public AtualizarAssuntoCommand(AtualizaAssuntoRequestModel viewModel)
         {
             Id = viewModel.Id;
             Descricao = viewModel.Descricao;

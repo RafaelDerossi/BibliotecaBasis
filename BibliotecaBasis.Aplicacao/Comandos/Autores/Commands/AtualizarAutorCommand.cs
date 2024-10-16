@@ -1,11 +1,11 @@
 ﻿using BibliotecaBasis.Aplicacao.Comandos.Autores.Validacao;
-using BibliotecaBasis.Dominio.ViewModels.Autores;
+using BibliotecaBasis.Dominio.Models.Autores;
 
 namespace BibliotecaBasis.Aplicacao.Comandos.Autores.Commands
 {
     public class AtualizarAutorCommand : AutorCommand
     {
-        public AtualizarAutorCommand(AtualizaAutorViewModel viewModel)
+        public AtualizarAutorCommand(AtualizaAutorRequestModel viewModel)
         {
             Id = viewModel.Id;
             Nome = viewModel.Nome;

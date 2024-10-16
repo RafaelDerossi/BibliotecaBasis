@@ -1,4 +1,5 @@
 ﻿using BibliotecaBasis.Dominio.Entidades;
+using BibliotecaBasis.Dominio.Models.Livros;
 
 namespace BibliotecaBasis.Aplicacao.Consultas.Livros
 {
@@ -7,5 +8,7 @@ namespace BibliotecaBasis.Aplicacao.Consultas.Livros
         Task<Livro?> ObterPorId(Guid Id);
 
         Task<IEnumerable<Livro>?> ObterTodos();
+
+        Task<IEnumerable<RelatorioLivroAutorResponseModel>?> ObterRelatorioDeLivros();
     }
 }

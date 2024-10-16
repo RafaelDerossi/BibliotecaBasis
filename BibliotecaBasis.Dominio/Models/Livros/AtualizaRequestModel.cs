@@ -1,9 +1,6 @@
-﻿using BibliotecaBasis.Dominio.ViewModels.Assuntos;
-using BibliotecaBasis.Dominio.ViewModels.Autores;
-
-namespace BibliotecaBasis.Dominio.ViewModels.Livros
+﻿namespace BibliotecaBasis.Dominio.Models.Livros
 {
-    public class AtualizaLivroViewModel
+    public class AtualizaRequestModel
     {
         public Guid Id { get; set; }
 
@@ -18,6 +15,6 @@ namespace BibliotecaBasis.Dominio.ViewModels.Livros
         public IEnumerable<Guid>? Autores { get; set; }
 
         public IEnumerable<Guid>? Assuntos { get; set; }
-        
+
     }
 }

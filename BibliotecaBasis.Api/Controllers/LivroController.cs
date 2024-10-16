@@ -1,11 +1,9 @@
 using BibliotecaBasis.Api.Controllers.Comum;
 using BibliotecaBasis.Aplicacao.Comandos.Livros.Commands;
 using BibliotecaBasis.Aplicacao.Consultas.Livros;
-using BibliotecaBasis.Comum.Enumeradores;
 using BibliotecaBasis.Comum.Mediator;
-using BibliotecaBasis.Dominio.Entidades;
-using BibliotecaBasis.Dominio.ViewModels.Autores;
-using BibliotecaBasis.Dominio.ViewModels.Livros;
+using BibliotecaBasis.Dominio.Models.Livros;
+using BibliotecaBasis.Dominio.Models.Precos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BibliotecaBasis.Api.Controllers
@@ -25,14 +23,14 @@ namespace BibliotecaBasis.Api.Controllers
         /// Obter Livro
         /// </summary>        
         [HttpGet("{id:Guid}", Name = "ObterLivro")]
-        public async Task<ActionResult<LivroViewModel>> ObterLivro(Guid id)
+        public async Task<ActionResult<LivroResponseModel>> ObterLivro(Guid id)
         {
             var livro = await _livroQuery.ObterPorId(id);
 
             if (livro is null)
                 return RespostaPersonalizadaComMensagemDeErro("Livro não encontrado");
 
-            return RespostaPersonalizadaSucesso(LivroViewModel.Mapear(livro));
+            return RespostaPersonalizadaSucesso(LivroResponseModel.Mapear(livro));
         }
 
 
@@ -40,13 +38,21 @@ namespace BibliotecaBasis.Api.Controllers
         /// Obter todos os livros cadastrados
         /// </summary>        
         [HttpGet(Name = "ListarLivros")]
-        public async Task<ActionResult<IEnumerable<LivroViewModel>>> ListarLivros()
+        public async Task<ActionResult<IEnumerable<LivroResponseModel>>> ListarLivros()
         {
             var livros = await _livroQuery.ObterTodos() ?? [];
 
-            return RespostaPersonalizadaSucesso(livros.Select(LivroViewModel.Mapear));
+            return RespostaPersonalizadaSucesso(livros.Select(LivroResponseModel.Mapear));
         }
 
+
+        [HttpGet("relatorio-livro-autor", Name = "RelatorioLivrosPorAutor")]
+        public async Task<ActionResult<IEnumerable<RelatorioLivroAutorResponseModel>>> RelatorioLivrosPorAutor()
+        {
+            var livros = await _livroQuery.ObterRelatorioDeLivros() ?? [];
+
+            return RespostaPersonalizadaSucesso(livros);
+        }
 
         /// <summary>
         /// Adicionar Livro
@@ -54,7 +60,7 @@ namespace BibliotecaBasis.Api.Controllers
         /// <param name="viewModel"></param>
         /// <returns></returns>
         [HttpPost(Name = "AdicionarLivro")]
-        public async Task<ActionResult> AdicionarLivro(AdicionaLivroViewModel viewModel)
+        public async Task<ActionResult> AdicionarLivro(AdicionaLivroRequestModel viewModel)
         {
             if (!ModelState.IsValid) return RespostaPersonalizadaComValidacao(ModelState);
 
@@ -70,7 +76,7 @@ namespace BibliotecaBasis.Api.Controllers
         /// <param name="viewModel"></param>
         /// <returns></returns>
         [HttpPut(Name = "AtualizarLivro")]
-        public async Task<ActionResult> AtualizarLivro(AtualizaLivroViewModel viewModel)
+        public async Task<ActionResult> AtualizarLivro(AtualizaRequestModel viewModel)
         {
             if (!ModelState.IsValid) return RespostaPersonalizadaComValidacao(ModelState);
 
@@ -109,7 +115,7 @@ namespace BibliotecaBasis.Api.Controllers
         /// </param>
         /// <returns></returns>
         [HttpPost("preco", Name = "AdicionarPreco")]
-        public async Task<ActionResult> AdicionarPreco(AdicionaPrecoViewModel viewModel)
+        public async Task<ActionResult> AdicionarPreco(AdicionaPrecoRequestModel viewModel)
         {
             if (!ModelState.IsValid) return RespostaPersonalizadaComValidacao(ModelState);
 

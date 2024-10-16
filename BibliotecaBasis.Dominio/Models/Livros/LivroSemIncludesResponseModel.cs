@@ -1,8 +1,8 @@
 ﻿using BibliotecaBasis.Dominio.Entidades;
 
-namespace BibliotecaBasis.Dominio.ViewModels.Livros
+namespace BibliotecaBasis.Dominio.Models.Livros
 {
-    public class LivroSemIncludesViewModel
+    public class LivroSemIncludesResponseModel
     {
         public Guid Id { get; set; }
 
@@ -12,18 +12,18 @@ namespace BibliotecaBasis.Dominio.ViewModels.Livros
 
         public int Edicao { get; set; }
 
-        public string? AnoPublicacao { get; set; }        
+        public string? AnoPublicacao { get; set; }
 
 
-        public static LivroSemIncludesViewModel Mapear(Livro livro)
+        public static LivroSemIncludesResponseModel Mapear(Livro livro)
         {
-            return new LivroSemIncludesViewModel
-            { 
+            return new LivroSemIncludesResponseModel
+            {
                 Id = livro.Id,
                 Titulo = livro.Titulo,
                 Editora = livro.Editora,
                 Edicao = livro.Edicao,
-                AnoPublicacao = livro.AnoPublicacao                
+                AnoPublicacao = livro.AnoPublicacao
             };
         }
 

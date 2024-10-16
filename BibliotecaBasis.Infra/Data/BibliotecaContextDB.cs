@@ -2,6 +2,7 @@
 using BibliotecaBasis.Comum.Mediator.Mensagens;
 using BibliotecaBasis.Comum.ObjetosDeInfra;
 using BibliotecaBasis.Dominio.Entidades;
+using BibliotecaBasis.Dominio.Models.Livros;
 using FluentValidation.Results;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +14,9 @@ namespace BibliotecaBasis.Infra.Data
         public DbSet<Assunto>? Assuntos { get; set; }
         public DbSet<Autor>? Autores { get; set; }
         public DbSet<Preco>? Precos { get; set; }
+
+        public DbSet<LivroViewModel>? LivrosCompletosViewModel { get; set; }
+
         
         public BibliotecaContextDB(DbContextOptions<BibliotecaContextDB> options,
                   IMediatorHandler mediatorHandler)

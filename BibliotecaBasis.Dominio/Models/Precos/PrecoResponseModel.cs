@@ -1,9 +1,9 @@
 ﻿using BibliotecaBasis.Comum.Enumeradores;
-using BibliotecaBasis.Dominio.ViewModels.Assuntos;
+using BibliotecaBasis.Dominio.Entidades;
 
-namespace BibliotecaBasis.Dominio.Entidades
+namespace BibliotecaBasis.Dominio.Models.Precos
 {
-    public class PrecoViewModel
+    public class PrecoResponseModel
     {
         public Guid Id { get; set; }
 
@@ -13,9 +13,9 @@ namespace BibliotecaBasis.Dominio.Entidades
 
         public string? DescricaoFormaDeVenda { get; set; }
 
-        public static PrecoViewModel Mapear(Preco preco)
+        public static PrecoResponseModel Mapear(Preco preco)
         {
-            return new PrecoViewModel 
+            return new PrecoResponseModel
             {
                 Id = preco.Id,
                 Valor = preco.Valor,

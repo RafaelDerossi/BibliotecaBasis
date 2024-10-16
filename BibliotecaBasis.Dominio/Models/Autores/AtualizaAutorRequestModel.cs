@@ -1,6 +1,6 @@
-﻿namespace BibliotecaBasis.Dominio.ViewModels.Autores
+﻿namespace BibliotecaBasis.Dominio.Models.Autores
 {
-    public class AtualizaAutorViewModel
+    public class AtualizaAutorRequestModel
     {
         public Guid Id { get; set; }
 

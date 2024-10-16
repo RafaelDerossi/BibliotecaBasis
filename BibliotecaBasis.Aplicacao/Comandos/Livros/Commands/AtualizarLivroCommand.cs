@@ -1,11 +1,11 @@
 ﻿using BibliotecaBasis.Aplicacao.Comandos.Livros.Validacao;
-using BibliotecaBasis.Dominio.ViewModels.Livros;
+using BibliotecaBasis.Dominio.Models.Livros;
 
 namespace BibliotecaBasis.Aplicacao.Comandos.Livros.Commands
 {
     public class AtualizarLivroCommand : LivroCommand
     {
-        public AtualizarLivroCommand(AtualizaLivroViewModel model)
+        public AtualizarLivroCommand(AtualizaRequestModel model)
         {
             Id = model.Id;
             Titulo = model.Titulo;

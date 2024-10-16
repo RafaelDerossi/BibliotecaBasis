@@ -1,8 +1,8 @@
 ﻿using BibliotecaBasis.Comum.Enumeradores;
 
-namespace BibliotecaBasis.Dominio.Entidades
+namespace BibliotecaBasis.Dominio.Models.Precos
 {
-    public class AdicionaPrecoViewModel
+    public class AdicionaPrecoRequestModel
     {
         public Guid LivroId { get; set; }
 

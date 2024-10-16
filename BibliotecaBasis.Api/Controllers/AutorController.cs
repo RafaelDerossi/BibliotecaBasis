@@ -2,8 +2,7 @@ using BibliotecaBasis.Api.Controllers.Comum;
 using BibliotecaBasis.Aplicacao.Comandos.Autores.Commands;
 using BibliotecaBasis.Aplicacao.Consultas.Autores;
 using BibliotecaBasis.Comum.Mediator;
-using BibliotecaBasis.Dominio.ViewModels.Assuntos;
-using BibliotecaBasis.Dominio.ViewModels.Autores;
+using BibliotecaBasis.Dominio.Models.Autores;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BibliotecaBasis.Api.Controllers
@@ -24,14 +23,14 @@ namespace BibliotecaBasis.Api.Controllers
         /// Obter Autor
         /// </summary>        
         [HttpGet("{id:Guid}", Name = "ObterAutor")]
-        public async Task<ActionResult<AutorComLivrosViewModel>> ObterAutor(Guid id)
+        public async Task<ActionResult<AutorComLivrosResponseModel>> ObterAutor(Guid id)
         {
             var autor = await _autorQuery.ObterPorId(id);
 
             if (autor is null)
                 return RespostaPersonalizadaComMensagemDeErro("Autor não encontrado");
 
-            return RespostaPersonalizadaSucesso(AutorComLivrosViewModel.Mapear(autor));
+            return RespostaPersonalizadaSucesso(AutorComLivrosResponseModel.Mapear(autor));
         }
 
 
@@ -39,11 +38,11 @@ namespace BibliotecaBasis.Api.Controllers
         /// Obter todos os autores cadastrados
         /// </summary>        
         [HttpGet(Name = "ListarAutores")]
-        public async Task<ActionResult<IEnumerable<AutorViewModel>>> ListarAutores()
+        public async Task<ActionResult<IEnumerable<AutorResponseModel>>> ListarAutores()
         {
             var autores = await _autorQuery.ObterTodos() ?? [];
 
-            return RespostaPersonalizadaSucesso(autores.Select(AutorViewModel.Mapear));
+            return RespostaPersonalizadaSucesso(autores.Select(AutorResponseModel.Mapear));
         }
 
         /// <summary>
@@ -52,7 +51,7 @@ namespace BibliotecaBasis.Api.Controllers
         /// <param name="viewModel"></param>
         /// <returns></returns>
         [HttpPost(Name = "AdicionarAutor")]
-        public async Task<ActionResult> AdicionarAutor(AdicionaAutorViewModel viewModel)
+        public async Task<ActionResult> AdicionarAutor(AdicionaAutorRequestModel viewModel)
         {
             if (!ModelState.IsValid) return RespostaPersonalizadaComValidacao(ModelState);
 
@@ -68,7 +67,7 @@ namespace BibliotecaBasis.Api.Controllers
         /// <param name="viewModel"></param>
         /// <returns></returns>
         [HttpPut(Name = "AtualizarAutor")]
-        public async Task<ActionResult> AtualizarAutor(AtualizaAutorViewModel viewModel)
+        public async Task<ActionResult> AtualizarAutor(AtualizaAutorRequestModel viewModel)
         {
             if (!ModelState.IsValid) return RespostaPersonalizadaComValidacao(ModelState);
 

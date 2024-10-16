@@ -1,11 +1,11 @@
 ﻿using BibliotecaBasis.Aplicacao.Comandos.Livros.Validacao;
-using BibliotecaBasis.Dominio.Entidades;
+using BibliotecaBasis.Dominio.Models.Precos;
 
 namespace BibliotecaBasis.Aplicacao.Comandos.Livros.Commands
 {
     public class AdicionarPrecoCommand : PrecoCommand
     {
-        public AdicionarPrecoCommand(AdicionaPrecoViewModel model)
+        public AdicionarPrecoCommand(AdicionaPrecoRequestModel model)
         {
             LivroId = model.LivroId;
             Valor = model.Valor;

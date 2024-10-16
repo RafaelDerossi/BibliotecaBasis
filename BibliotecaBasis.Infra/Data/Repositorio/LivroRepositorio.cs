@@ -1,6 +1,7 @@
 ﻿using BibliotecaBasis.Comum.ObjetosDeInfra;
 using BibliotecaBasis.Dominio.Entidades;
 using BibliotecaBasis.Dominio.Interfaces;
+using BibliotecaBasis.Dominio.Models.Livros;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
@@ -66,7 +67,13 @@ namespace BibliotecaBasis.Infra.Data.Repositorio
                 .ToListAsync()!;
         }
 
-       
+
+        public async Task<IEnumerable<LivroViewModel>?> ObterViewDeLivros()
+        {
+            return await _context.LivrosCompletosViewModel?                
+                .Where(l => !l.Lixeira).ToListAsync()!;
+        }
+
 
         public void Adicionar(Livro entity)
         {

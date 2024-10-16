@@ -50,12 +50,7 @@ namespace BibliotecaBasis.Api.Configuration
             app.UseApiConfiguration(env);
 
             app.UseHttpsRedirection();
-
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapControllers();
-            //});
-
+           
             app.MapHealthChecks("/healthcheck").AllowAnonymous();
         }
     }

@@ -1,10 +1,8 @@
 using BibliotecaBasis.Api.Controllers.Comum;
 using BibliotecaBasis.Aplicacao.Comandos.Assuntos.Commands;
-using BibliotecaBasis.Aplicacao.Comandos.Autores.Commands;
 using BibliotecaBasis.Aplicacao.Consultas.Assuntos;
 using BibliotecaBasis.Comum.Mediator;
-using BibliotecaBasis.Dominio.ViewModels.Assuntos;
-using BibliotecaBasis.Dominio.ViewModels.Livros;
+using BibliotecaBasis.Dominio.Models.Assuntos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BibliotecaBasis.Api.Controllers
@@ -24,25 +22,25 @@ namespace BibliotecaBasis.Api.Controllers
         /// Obter assunto
         /// </summary>        
         [HttpGet("{id:Guid}", Name = "ObterAssunto")]
-        public async Task<ActionResult<AssuntoComLivrosViewModel>> ObterAssunto(Guid id)
+        public async Task<ActionResult<AssuntoComLivrosResponseModel>> ObterAssunto(Guid id)
         {
             var assunto = await _assuntoQuery.ObterPorId(id);
 
             if (assunto is null)
                 return RespostaPersonalizadaComMensagemDeErro("Assunto não encontrado");
 
-            return RespostaPersonalizadaSucesso(AssuntoComLivrosViewModel.Mapear(assunto));
+            return RespostaPersonalizadaSucesso(AssuntoComLivrosResponseModel.Mapear(assunto));
         }
 
         /// <summary>
         /// Obter todos os assuntos cadastrados
         /// </summary>        
         [HttpGet(Name = "ListarAssuntos")]
-        public async Task<ActionResult<IEnumerable<AssuntoViewModel>>> ListarAssuntos()
+        public async Task<ActionResult<IEnumerable<AssuntoResponseModel>>> ListarAssuntos()
         {
             var assuntos = await _assuntoQuery.ObterTodos() ?? [];
 
-            return RespostaPersonalizadaSucesso(assuntos.Select(AssuntoViewModel.Mapear));
+            return RespostaPersonalizadaSucesso(assuntos.Select(AssuntoResponseModel.Mapear));
         }
 
         /// <summary>
@@ -51,7 +49,7 @@ namespace BibliotecaBasis.Api.Controllers
         /// <param name="viewModel"></param>
         /// <returns></returns>
         [HttpPost(Name = "AdicionarAssunto")]
-        public async Task<ActionResult> AdicionarAssunto(AdicionaAssuntoViewModel viewModel)
+        public async Task<ActionResult> AdicionarAssunto(AdicionaAssuntoRequestModel viewModel)
         {
             if (!ModelState.IsValid) return RespostaPersonalizadaComValidacao(ModelState);
 
@@ -66,7 +64,7 @@ namespace BibliotecaBasis.Api.Controllers
         /// <param name="viewModel"></param>
         /// <returns></returns>
         [HttpPut(Name = "AtualizarAssunto")]
-        public async Task<ActionResult> AtualizarAssunto(AtualizaAssuntoViewModel viewModel)
+        public async Task<ActionResult> AtualizarAssunto(AtualizaAssuntoRequestModel viewModel)
         {
             if (!ModelState.IsValid) return RespostaPersonalizadaComValidacao(ModelState);
 
