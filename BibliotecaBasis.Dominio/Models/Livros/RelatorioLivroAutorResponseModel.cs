@@ -1,13 +1,37 @@
-﻿namespace BibliotecaBasis.Dominio.Models.Livros
+﻿using BibliotecaBasis.Dominio.Models.Autores;
+
+namespace BibliotecaBasis.Dominio.Models.Livros
 {
     public class RelatorioLivroAutorResponseModel
     {
+        public AutorResponseModel? Autor { get; set; }
+
+        public List<LivroAutorResponseModel>? Livros { get; set; }
+
+        public RelatorioLivroAutorResponseModel()
+        {
+            Livros = [];
+        }
+
+        public void SetAutor(Guid? id, string? nome)
+        {
+            Autor = new AutorResponseModel { Id = id, Nome = nome };
+        }
+
+        public void AdicionarLivro
+            (Guid? id, string? titulo, string? editora, int? edicao,
+             string? anoPublicacao, string? assuntos, string? autores)
+        {
+            Livros?.Add(new LivroAutorResponseModel
+                (id, titulo, editora, edicao, anoPublicacao, assuntos, autores));
+        }
+
+    }
+        
+
+    public class LivroAutorResponseModel
+    {
         public Guid? Id { get; set; }
-
-        public DateTime? DataDeCadastro { get; set; }
-
-        public DateTime? DataDeAlteracao { get; set; }       
-
 
         public string? Titulo { get; set; }
 
@@ -20,30 +44,25 @@
 
         public Guid? AutorId { get; set; }
         public string? AutorNome { get; set; }
-        
+
         public string? Assuntos { get; set; }
 
         public string? Autores { get; set; }
 
 
-        public RelatorioLivroAutorResponseModel()
-        {                
+        public LivroAutorResponseModel()
+        {
         }
 
-        public RelatorioLivroAutorResponseModel
-            (Guid? id, DateTime? dataDeCadastro, DateTime? dataDeAlteracao, string? titulo,
-            string? editora, int? edicao, string? anoPublicacao, Guid? autorId, string? autorNome,
-            string? assuntos, string? autores)
+        public LivroAutorResponseModel
+            (Guid? id, string? titulo, string? editora, int? edicao,
+             string? anoPublicacao, string? assuntos, string? autores)
         {
-            Id = id;
-            DataDeCadastro = dataDeCadastro;
-            DataDeAlteracao = dataDeAlteracao;
+            Id = id;            
             Titulo = titulo;
             Editora = editora;
             Edicao = edicao;
-            AnoPublicacao = anoPublicacao;
-            AutorId = autorId;
-            AutorNome = autorNome;
+            AnoPublicacao = anoPublicacao;            
             Assuntos = assuntos;
             Autores = autores;
         }
